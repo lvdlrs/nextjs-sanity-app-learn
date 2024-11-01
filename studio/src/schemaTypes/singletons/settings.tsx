@@ -27,6 +27,7 @@ export default defineType({
       description: 'Used both for the <meta> description tag for SEO, and the blog subheader.',
       title: 'Description',
       type: 'array',
+      group: 'global',
       initialValue: initial.siteDescription,
       of: [
         defineArrayMember({
