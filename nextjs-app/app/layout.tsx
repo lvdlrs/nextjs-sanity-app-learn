@@ -2,7 +2,7 @@ import "./globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Sora } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing, toPlainText } from "next-sanity";
 import { Toaster } from "sonner";
@@ -15,6 +15,7 @@ import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
+import HeaderHeightWrapper from "./components/HeaderHeightWrapper ";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await sanityFetch({
@@ -47,8 +48,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const inter = Inter({
-  variable: "--font-inter",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
 });
@@ -61,9 +62,9 @@ export default async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" className={`${inter.variable} bg-white text-black`}>
+    <html lang="en" className={`${sora.variable} bg-white text-grey-900`}>
       <body>
-        <section className="min-h-screen pt-24">
+        <section className="min-h-screen">
           <Toaster />
           {isDraftMode && (
             <>
@@ -75,7 +76,9 @@ export default async function RootLayout({
             <SanityLive />
           </LiveErrorBoundary>
           <Header />
-          <main className="">{children}</main>
+          <HeaderHeightWrapper>   
+            <div>{children}</div>
+          </HeaderHeightWrapper>
           <Footer />
         </section>
         <SpeedInsights />
