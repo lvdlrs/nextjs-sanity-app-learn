@@ -1,28 +1,33 @@
 import {CogIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-import * as demo from '../../lib/initialValues'
+import * as initial from '../../lib/initialValues'
 
 export default defineType({
   name: 'settings',
   title: 'Settings',
   type: 'document',
   icon: CogIcon,
+  groups: [
+    {name: 'global', title: 'Global'},
+    {name: 'header', title: 'Header'},
+    {name: 'footer', title: 'Footer'}
+  ],
   fields: [
     defineField({
-      name: 'title',
-      description: 'This field is the title of your blog.',
-      title: 'Title',
+      name: 'siteTitle',
+      title: 'Site Title',
       type: 'string',
-      initialValue: demo.title,
-      validation: (rule) => rule.required(),
+      description: 'Your website site title',
+      group: 'global',
+      initialValue: initial.siteTitle
     }),
     defineField({
       name: 'description',
       description: 'Used both for the <meta> description tag for SEO, and the blog subheader.',
       title: 'Description',
       type: 'array',
-      initialValue: demo.description,
+      initialValue: initial.siteDescription,
       of: [
         defineArrayMember({
           type: 'block',
@@ -89,6 +94,115 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'siteFavicon',
+      title: 'Site Favicon',
+      type: 'image',
+      description: 'Your website site favicon.',
+      group: 'global',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alt'
+        }
+      ]
+    }),
+    defineField({
+      name: 'siteLogo',
+      title: 'Site Logo',
+      type: 'image',
+      description: 'Your website logo.',
+      group: 'header',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alt'
+        }
+      ]
+    }),
+    defineField({
+      name: 'siteLogoTransparent',
+      title: 'Site Logo (For transparent header)',
+      type: 'image',
+      description: 'Your website logo for transparent header.',
+      group: 'header',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alt'
+        }
+      ]
+    }),
+    defineField({
+      name: 'headerMenu',
+      title: 'Header Menu',
+      type: 'array',
+      group: 'header',
+      of: [
+        {
+          type: 'headerLink'
+        },
+      ]
+    }),
+    defineField({
+      type: 'gallery',
+      name: 'prefooterGallery',
+      group: ['global', 'footer'],
+      title: 'Prefooter Logo'
+    }),
+    defineField({
+      name: 'footerLogo',
+      title: 'Footer Logo',
+      type: 'image',
+      description: 'Your website logo.',
+      group: 'footer',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alt'
+        }
+      ]
+    }),
+    defineField({
+      name: 'footerContent',
+      title: 'Footer contents',
+      type: 'footerContent',
+      group: 'footer'
+    }),
+    defineField({
+      type: 'array',
+      name: 'socialIcon',
+      title: 'Footer Social Icons',
+      group: 'footer',
+      of: [{ type: 'social'}]
+  }),
+    defineField({
+      name: 'footerMenu',
+      title: 'Footer Menu',
+      type: 'array',
+      group: 'footer',
+      of: [
+        {
+          type: 'footerLink'
+        },
+      ]
+    }),
+    defineField({
+      type:'string',
+      name: 'copyrightSite',
+      title: 'Copyright',
+      initialValue: initial.copyrightText
+    })
   ],
   preview: {
     prepare() {

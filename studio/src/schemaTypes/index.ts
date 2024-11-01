@@ -7,6 +7,11 @@ import infoSection from './objects/infoSection'
 import settings from './singletons/settings'
 import link from './objects/link'
 import blockContent from './objects/blockContent'
+import headerLink from './objects/headerLink'
+import footerLink from './objects/footerLink'
+import footerContent from './objects/footerContent'
+import social from './objects/social'
+import gallery from './objects/gallery'
 
 export const schemaTypes = [
   // Singletons
@@ -20,4 +25,9 @@ export const schemaTypes = [
   infoSection,
   callToAction,
   link,
+  social,
+  gallery,
+  headerLink,
+  footerLink,
+  footerContent
 ]

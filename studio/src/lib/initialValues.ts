@@ -2,9 +2,9 @@
  * Demo data used as placeholders and initial values for the blog
  */
 
-export const title = 'Blog.'
+export const siteTitle = 'You website title'
 
-export const description = [
+export const siteDescription = [
   {
     _key: '9f1a629887fd',
     _type: 'block',
@@ -57,3 +57,5 @@ export const description = [
 ]
 
 export const ogImageTitle = 'A Next.js Blog with a Native Authoring Experience'
+
+export const copyrightText = 'Copyright Company name'
