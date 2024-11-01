@@ -1,24 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 border-gray-100 border-t">
+    <footer className="relative">
       <div className="container">
-        <div className="flex flex-col items-center py-28 lg:flex-row">
-          <h3 className="mb-10 text-center text-4xl font-bold leading-tight tracking-tighter lg:mb-0 lg:w-1/2 lg:pr-4 lg:text-left lg:text-5xl">
-            Built with Sanity + Next.js.
-          </h3>
-          <div className="flex flex-col gap-3 items-center justify-center lg:w-1/2 lg:flex-row lg:pl-4">
-            <a
-              href="https://github.com/sanity-io/sanity-template-nextjs-clean"
-              className="rounded-full flex gap-2 items-center bg-black hover:bg-red-500 focus:bg-cyan-500 py-3 px-6 text-white transition-colors duration-200"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on GitHub
-            </a>
-            <a href="https://nextjs.org/docs" className="mx-3 hover:underline">
-              Read Next.js Documentation
-            </a>
-          </div>
+        <div className="flex flex-col gap-3 md:justify-between md:flex-row py-6 border-t border-t-blue-300">
+          <p className="text-[14px] text-grey-700 text-center md:text-left">© 2024 Fram Marine AS</p>
+          <p className="text-[14px] text-grey-700 text-center md:text-right">Webdesign by Fjellvann, a part of Solid Media</p>
         </div>
       </div>
     </footer>
