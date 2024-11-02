@@ -1,6 +1,14 @@
-export default function Footer() {
+import { sanityFetch } from "@/sanity/lib/live";
+import { settingsQuery } from "@/sanity/lib/queries";
+
+export default async function Footer() {
+  const { data: settings } = await sanityFetch({query: settingsQuery});
+
+  const footerLogo = settings?.footerLogo;
+  
   return (
     <footer className="relative">
+      <div className="container"></div>
       <div className="container">
         <div className="flex flex-col gap-3 md:justify-between md:flex-row py-6 border-t border-t-blue-400">
           <p className="text-[14px] text-grey-700 text-center md:text-left">© 2024 Fram Marine AS</p>
