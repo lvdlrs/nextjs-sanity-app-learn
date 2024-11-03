@@ -202,6 +202,7 @@ export default defineType({
       type:'string',
       name: 'copyrightSite',
       title: 'Copyright',
+      group: 'footer',
       initialValue: initial.copyrightText
     })
   ],

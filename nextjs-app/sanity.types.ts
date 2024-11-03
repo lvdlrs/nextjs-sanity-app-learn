@@ -71,21 +71,9 @@ export type Geopoint = {
 export type FooterLink = {
   _type: "footerLink";
   menuheading?: string;
-  linkType?: "href" | "page" | "post";
-  href?: string;
-  page?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  };
-  post?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "post";
-  };
-  openInNewTab?: boolean;
+  footerMenuItems?: Array<{
+    _key: string;
+  } & Link>;
 };
 
 export type HeaderLink = {
@@ -135,6 +123,7 @@ export type CallToAction = {
 
 export type Link = {
   _type: "link";
+  linkCustomTitle?: string;
   linkType?: "href" | "page" | "post";
   href?: string;
   page?: {
@@ -719,6 +708,7 @@ export type GetPageQueryResult = {
     buttonText?: string;
     link: {
       _type: "link";
+      linkCustomTitle?: string;
       linkType?: "href" | "page" | "post";
       href?: string;
       page: string | null;

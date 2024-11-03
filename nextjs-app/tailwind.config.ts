@@ -27,6 +27,14 @@ export default {
           400: '#0064A2'
         }
       },
+      fontSize: {
+        heading1: 'clamp(2rem, 1.5357rem + 2.3214vw, 3.625rem)',
+        heading2: 'clamp(1.5rem, 1.1786rem + 1.6071vw, 2.625rem)',
+        heading3: 'clamp(1.125rem, 0.9464rem + 0.8929vw, 1.75rem)',
+        heading4: 'clamp(1rem, 0.8571rem + 0.7143vw, 1.5rem)',
+        heading5: 'clamp(0.875rem, 0.8036rem + 0.3571vw, 1.125rem)',
+        heading6: 'clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem)',
+      },
       fontFamily: {
         sans: ["var(--font-sora)"],
       },

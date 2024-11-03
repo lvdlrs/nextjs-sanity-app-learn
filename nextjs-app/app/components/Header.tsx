@@ -52,9 +52,6 @@ export default async function Header() {
               </ul>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-6 flex items-center lg:hidden">
-
-          </div>
         </div>
       </div>
 
