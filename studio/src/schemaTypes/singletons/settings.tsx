@@ -5,7 +5,7 @@ import * as initial from '../../lib/initialValues'
 
 export default defineType({
   name: 'settings',
-  title: 'Settings',
+  title: 'Site Settings',
   type: 'document',
   icon: CogIcon,
   groups: [

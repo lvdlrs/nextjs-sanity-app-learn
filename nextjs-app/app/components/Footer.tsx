@@ -1,17 +1,19 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import { settingsQuery } from "@/sanity/lib/queries";
+import { pagesSlugs, settingsQuery } from "@/sanity/lib/queries";
 
 import { stegaClean, type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/components/PortableText";
 import Link from "next/link";
 import { Image } from "next-sanity/image";
-import { linkResolver, urlForImage } from "@/sanity/lib/utils";
-import { getLinkFromType } from "./utils";
-import ResolvedLink from "./ResolvedLink";
-import { internalGroqTypeReferenceTo } from "@/sanity.types";
+import { urlForImage } from "@/sanity/lib/utils";
 
 export default async function Footer() {
   const { data: settings } = await sanityFetch({query: settingsQuery});
+  const { data } = await sanityFetch({
+    query: pagesSlugs,
+    perspective: "published",
+    stega: false,
+  });
 
   const footerLogo = settings?.footerLogo;
   const footerContent = settings?.footerContent;
@@ -20,7 +22,7 @@ export default async function Footer() {
   const footerMenu = settings?.footerMenu;
 
   const copyright = settings?.copyrightSite;
-  
+
   return (
     <footer className="relative">
       <div className="flex flex-col gap-10 md:gap-20 lg:gap-[86px]">
@@ -84,8 +86,10 @@ export default async function Footer() {
                     {menu.menuheading && (<h3 className="leading-normal text-[18px] font-semibold">{menu.menuheading}</h3>)}
                     {menu.footerMenuItems && (
                       <ul className="flex flex-col gap-3 leading-normal">
+                        
                         {menu.footerMenuItems.map((navItem)=>(
                           <li key={navItem._key}>
+                           <Link href="#">{navItem.linkCustomTitle}</Link>
                           </li>
                         ))
                         }

@@ -17,6 +17,7 @@ export default function ResolvedLink({
 
   if (typeof resolvedLink === "string") {
     return (
+      
       <Link
         href={resolvedLink}
         target={link?.openInNewTab ? "_blank" : undefined}

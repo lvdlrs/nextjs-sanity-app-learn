@@ -17,7 +17,7 @@ export default defineType({
       name: 'linkType',
       title: 'Link Type',
       type: 'string',
-      initialValue: 'url',
+      initialValue: 'href',
       options: {
         list: [
           {title: 'URL', value: 'href'},
@@ -33,7 +33,8 @@ export default defineType({
       type: 'url',
       hidden: ({parent}) => parent?.linkType !== 'href',
       validation: (Rule) => Rule.uri({
-        scheme: ['http', 'https', 'mailto', 'tel']
+        scheme: ['http', 'https', 'mailto', 'tel'],
+        allowRelative: true
       }),
     }),
     defineField({
