@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import { pagesSlugs, settingsQuery } from "@/sanity/lib/queries";
+import { getPageQuery, settingsQuery } from "@/sanity/lib/queries";
 
 import { stegaClean, type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/components/PortableText";
@@ -9,9 +9,8 @@ import { urlForImage } from "@/sanity/lib/utils";
 
 export default async function Footer() {
   const { data: settings } = await sanityFetch({query: settingsQuery});
-  const { data } = await sanityFetch({
-    query: pagesSlugs,
-    perspective: "published",
+  const { data: page } = await sanityFetch({
+    query: getPageQuery,
     stega: false,
   });
 
