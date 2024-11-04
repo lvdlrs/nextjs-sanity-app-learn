@@ -12,14 +12,14 @@ export default async function Header() {
   const { data: settings } = await sanityFetch({query: settingsQuery});
 
 
-  const logo = settings?.siteLogo?.asset?._ref ? (
+  const logo = settings?.header?.siteLogo?.asset?._ref ? (
     <Link href="/" className="w-[117px] h-[40px] block relative">
     <Image
       className="object-cover"
       fill={true}
-      alt={stegaClean(settings?.siteLogo?.alt) || ""}
+      alt={stegaClean(settings?.header?.siteLogo?.alt) || ""}
       src={
-        urlForImage(settings?.siteLogo)
+        urlForImage(settings?.header?.siteLogo)
           ?.height(40)
           .width(117)
           .auto("format")
@@ -29,7 +29,7 @@ export default async function Header() {
     />
     </Link>
   ) : (
-    <Link href="/">{settings?.siteTitle || 'Website Title'}</Link>
+    <Link href="/">{settings?.seo?.siteTitle || 'Website Title'}</Link>
   );
 
   return (

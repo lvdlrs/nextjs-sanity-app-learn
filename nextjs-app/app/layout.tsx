@@ -23,14 +23,14 @@ export async function generateMetadata(): Promise<Metadata> {
     // Metadata should never contain stega
     stega: false,
   });
-  const title = settings?.siteTitle || demo.title;
-  const description = settings?.description || demo.description;
+  const title = settings?.seo?.siteTitle || demo.title;
+  const description = settings?.seo?.description || demo.description;
 
-  const ogImage = resolveOpenGraphImage(settings?.ogImage);
+  const ogImage = resolveOpenGraphImage(settings?.seo?.ogImage);
   let metadataBase: URL | undefined = undefined;
   try {
-    metadataBase = settings?.ogImage?.metadataBase
-      ? new URL(settings.ogImage.metadataBase)
+    metadataBase = settings?.seo?.ogImage?.metadataBase
+      ? new URL(settings?.seo?.ogImage.metadataBase)
       : undefined;
   } catch {
     // ignore

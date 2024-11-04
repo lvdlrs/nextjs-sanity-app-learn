@@ -8,6 +8,13 @@ export default defineType({
   icon: LinkIcon,
   fields: [
     defineField({
+      name: 'linkCustomTitle',
+      title: 'Menu Items Title',
+      type: 'string',
+      validation: (Rule) =>
+        Rule.required().error("You must specify a menu title.")
+    }),
+    defineField({
       name: 'linkType',
       title: 'Link Type',
       type: 'string',
@@ -26,13 +33,10 @@ export default defineType({
       title: 'URL',
       type: 'url',
       hidden: ({parent}) => parent?.linkType !== 'href',
-      validation: (Rule) =>
-        Rule.custom((value, context: any) => {
-          if (context.parent?.linkType === 'href' && !value) {
-            return 'URL is required when Link Type is URL'
-          }
-          return true
-        }),
+      validation: (Rule) => Rule.uri({
+        scheme: ['http', 'https', 'mailto', 'tel'],
+        allowRelative: true
+      }),
     }),
     defineField({
       name: 'page',

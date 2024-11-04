@@ -49,3 +49,14 @@ export function linkResolver(link: Link | undefined) {
       return null;
   }
 }
+
+export function getLinkFromType(type: any){
+  switch(type){
+    case "page":
+      return "/page"
+    case "post":
+      return "/posts"
+    default:
+      return ""
+  }  
+}

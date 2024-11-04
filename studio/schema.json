@@ -383,6 +383,13 @@
             "value": "headerLink"
           }
         },
+        "linkCustomTitle": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
         "linkType": {
           "type": "objectAttribute",
           "value": {
@@ -643,7 +650,7 @@
           "value": {
             "type": "string"
           },
-          "optional": true
+          "optional": false
         },
         "linkType": {
           "type": "objectAttribute",

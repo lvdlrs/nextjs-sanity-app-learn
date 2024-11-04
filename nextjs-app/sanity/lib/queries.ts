@@ -1,6 +1,72 @@
 import { defineQuery } from "next-sanity";
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
+export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
+  "seo": {
+    siteFavicon,
+    siteTitle,
+    description,
+    ogImage{
+      asset,
+      hotspot,
+      crop,
+      metadataBase
+    }
+  },
+  "header": {
+    siteLogo{
+      alt,
+      asset
+    },
+    siteLogoTransparent{
+      alt,
+      asset
+    },
+    headerMenu[]{
+      _key,
+      linkCustomTitle,
+      linkType,
+      openInNewTab,
+      "link": select(
+        linkType == "page" => page->slug.current,
+        linkType == "post" => post->slug.current,
+        linkType == "href" => href
+      )
+    }
+  },
+  "footer": {
+    footerLogo{
+      alt,
+      asset
+    },
+    footerMenu[]{
+      _key,
+      menuheading,
+      footerMenuItems[]{
+        _key,   
+        linkCustomTitle,
+        linkType,
+        openInNewTab,
+        "link": select(
+          linkType == "page" => page->slug.current,
+          linkType == "post" => post->slug.current,
+          linkType == "href" => href
+        )
+      }
+    },
+    footerContent{
+      content
+    },
+    socialIcon[]{
+      _key,
+      href,
+      socialIcon{
+        alt,
+        asset
+      },
+    },
+    copyrightSite
+  }
+}`);
 
 const postFields = /* groq */ `
   _id,
@@ -22,6 +88,8 @@ const linkFields = /* groq */ `
         }
       }
 `;
+
+export const pageQuery = defineQuery(`*[_type == 'page']`);
 
 export const getPageQuery = defineQuery(`
   *[_type == 'page' && slug.current == $slug][0]{

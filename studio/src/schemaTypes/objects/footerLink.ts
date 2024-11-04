@@ -1,6 +1,5 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {LinkIcon} from '@sanity/icons'
-import { INTERNAL_LINKS } from './constant'
 
 export default defineType({
   name: 'footerLink',

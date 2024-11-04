@@ -10,8 +10,9 @@ export default defineType({
     defineField({
       name: 'linkCustomTitle',
       title: 'Menu Items Title',
-      description: 'This will override the title of menu items in post or page.',
-      type: 'string'
+      type: 'string',
+      validation: (Rule) =>
+        Rule.required().error("You must specify a menu title.")
     }),
     defineField({
       name: 'linkType',
