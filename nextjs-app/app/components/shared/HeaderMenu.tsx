@@ -40,7 +40,7 @@ export default function HeaderMenu(props: SiteNavigationProps) {
   );
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="xl" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -57,7 +57,7 @@ export default function HeaderMenu(props: SiteNavigationProps) {
                 {item.cta ? (
                     <LinkButton href={item.link ?? ""} type={item.linkType ?? ""} label={item.linkCustomTitle} openinewtab={item.openInNewTab ?? false}/>
                 ) : (  
-                    <Link color="foreground" href={generateLink(item.link ?? "", item.linkType ?? "")}>
+                    <Link href={generateLink(item.link ?? "", item.linkType ?? "")}>
                     {item.linkCustomTitle}
                     </Link>
                 )}
