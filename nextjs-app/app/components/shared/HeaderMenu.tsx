@@ -40,7 +40,7 @@ export default function HeaderMenu(props: SiteNavigationProps) {
   );
 
   return (
-    <Navbar maxWidth="xl" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="xl" className="container bg-transparent backdrop-blur-none" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
