@@ -79,7 +79,7 @@ export default async function RootLayout({
           </LiveErrorBoundary>
           
           <Providers>
-          <HeaderMenu data={data?.data?.header ?? null} />
+          <HeaderMenu data={data?.data?.header ?? null} seo={data?.data?.seo ?? null} />
           <HeaderHeightWrapper>
             {children}
           </HeaderHeightWrapper>
