@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
-import {nextui} from "@nextui-org/react";
+import {colors, nextui} from "@nextui-org/react";
 
 export default {
   content: [
@@ -49,7 +49,20 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   plugins: [
-    nextui(),
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: '#343434'
+          }
+        },
+        dark: {
+          colors: {
+            primary: '#fff'
+          }
+        }
+      }
+    }),
     typography,
     function ({ addComponents }: { addComponents: (components: Record<string, any>) => void }) {
       addComponents({
