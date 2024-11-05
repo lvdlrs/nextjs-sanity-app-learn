@@ -26,6 +26,7 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
       linkCustomTitle,
       linkType,
       openInNewTab,
+      cta,
       "link": select(
         linkType == "page" => page->slug.current,
         linkType == "post" => post->slug.current,

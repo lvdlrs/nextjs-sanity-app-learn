@@ -9,13 +9,15 @@ import { Toaster } from "sonner";
 
 import DraftModeToast from "@/app/components/DraftModeToast";
 import Footer from "@/app/components/Footer";
-import Header from "@/app/components/Header";
+
 import { LiveErrorBoundary } from "@/app/components/LiveErrorBoundary";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import HeaderHeightWrapper from "./components/HeaderHeightWrapper ";
+import { Providers } from "./provider";
+import HeaderMenu from "./components/shared/HeaderMenu";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await sanityFetch({
@@ -60,7 +62,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
-
+  const data = await sanityFetch({query: settingsQuery});
   return (
     <html lang="en" className={`${sora.variable} bg-white text-grey-900`}>
       <body>
@@ -75,11 +77,14 @@ export default async function RootLayout({
           <LiveErrorBoundary>
             <SanityLive />
           </LiveErrorBoundary>
-          <Header />
-          <HeaderHeightWrapper>   
-            <div>{children}</div>
+          
+          <Providers>
+          <HeaderMenu data={data?.data?.header ?? null} />
+          <HeaderHeightWrapper>
+            {children}
           </HeaderHeightWrapper>
           <Footer />
+          </Providers>
         </section>
         <SpeedInsights />
       </body>

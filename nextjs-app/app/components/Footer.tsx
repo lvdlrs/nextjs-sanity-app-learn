@@ -5,7 +5,7 @@ import { stegaClean, type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/components/PortableText";
 import Link from "next/link";
 import { Image } from "next-sanity/image";
-import { getLinkFromType, urlForImage } from "@/sanity/lib/utils";
+import { generateLink, urlForImage } from "@/sanity/lib/utils";
 
 export default async function Footer() {
   const { data: settings } = await sanityFetch({query: settingsQuery});
@@ -78,7 +78,7 @@ export default async function Footer() {
                         
                         {menu.footerMenuItems.map((navItem)=>(
                           <li key={navItem._key}>
-                           <Link href={getLinkFromType(navItem.linkType) + "/" + navItem.link}>{navItem.linkCustomTitle}</Link>
+                           <Link href={generateLink(navItem.link ?? "", navItem.linkType ?? "")}>{navItem.linkCustomTitle}</Link>
                           </li>
                         ))
                         }

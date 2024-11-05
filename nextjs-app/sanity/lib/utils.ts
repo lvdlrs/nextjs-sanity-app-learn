@@ -50,13 +50,13 @@ export function linkResolver(link: Link | undefined) {
   }
 }
 
-export function getLinkFromType(type: any){
+export function generateLink(link: string, type?: string){
   switch(type){
     case "page":
-      return "/page"
+      return `/page/${link}`
     case "post":
-      return "/posts"
+      return `/posts/${link}`
     default:
-      return ""
+      return link
   }  
 }

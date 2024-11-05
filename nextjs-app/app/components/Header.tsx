@@ -5,7 +5,8 @@ import Link from "next/link";
 import { stegaClean } from "@sanity/client/stega";
 import { Image } from "next-sanity/image";
 
-import { urlForImage } from "@/sanity/lib/utils";
+import { generateLink, urlForImage } from "@/sanity/lib/utils";
+import LinkButton from "./ui/LinkButton";
 
 
 export default async function Header() {
@@ -42,14 +43,20 @@ export default async function Header() {
             <div className="flex flex-shrink-0 items-center">
               {logo}
             </div>
-            <div className="w-full lg:ml-8 lg:block">
-              <ul className="flex items-center lg:justify-end gap-6 md:gap-14">
-                <li><Link className="py-[50px] block" href="#">Menu 1</Link></li>
-                <li><Link className="py-[50px] block" href="#">Menu 2</Link></li>
-                <li><Link className="py-[50px] block" href="#">Menu 3</Link></li>
-                <li><Link className="py-[50px] block" href="#">Menu 4</Link></li>
-                <li><Link className="block py-4 px-6 border rounded-[500px] border-blue-400 bg-blue-400 text-white hover:bg-transparent hover:text-blue-400 transition-all duration-300 ease-in-out" href="#">Header CTA</Link></li>
-              </ul>
+            <div className="w-full hidden lg:ml-8 lg:block">
+              {settings?.header?.headerMenu && (
+                <ul className="flex items-center lg:justify-end gap-6 md:gap-14">
+                  {settings?.header?.headerMenu.map((navitem)=>(
+                    <li key={navitem._key}>
+                      {navitem.cta ? (
+                        <LinkButton href={navitem.link ?? ""} type={navitem.linkType ?? ""} label={navitem.linkCustomTitle} openinewtab={navitem.openInNewTab ?? false}/>
+                      ) :(
+                        <Link className="py-[50px] block hover:text-blue-400" href={generateLink(navitem.link ?? "", navitem.linkType ?? "")}>{navitem.linkCustomTitle}</Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>

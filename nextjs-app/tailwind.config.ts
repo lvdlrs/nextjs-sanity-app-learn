@@ -1,8 +1,13 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import {nextui} from "@nextui-org/react";
 
 export default {
-  content: ["./app/**/*.{ts,tsx}", "./sanity/**/*.{ts,tsx}"],
+  content: [
+    "./app/**/*.{ts,tsx}", 
+    "./sanity/**/*.{ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     container: {
       center: true,
@@ -44,6 +49,7 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   plugins: [
+    nextui(),
     typography,
     function ({ addComponents }: { addComponents: (components: Record<string, any>) => void }) {
       addComponents({
