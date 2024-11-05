@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
 
 import { generateLink, urlForImage } from "@/sanity/lib/utils";
 
@@ -8,8 +8,7 @@ import { SettingsQueryResult } from "@/sanity.types";
 
 import { stegaClean } from "@sanity/client/stega";
 import { Image } from "next-sanity/image";
-
-import { NextButton } from "../nextjsui-override/NextButton";
+import LinkButton from "../ui/LinkButton";
 
 
 type SiteNavigationProps = {
@@ -56,7 +55,7 @@ export default function HeaderMenu(props: SiteNavigationProps) {
         {props.data?.headerMenu?.map((item)=>(
             <NavbarItem key={item._key}>
                 {item.cta ? (
-                    <NextButton color="primary" variant="solid" size="md" radius="full">{item.linkCustomTitle}</NextButton>
+                    <LinkButton href={item.link ?? ""} type={item.linkType ?? ""} label={item.linkCustomTitle} openinewtab={item.openInNewTab ?? false}/>
                 ) : (  
                     <Link isExternal={item.openInNewTab ? item.openInNewTab : false } href={generateLink(item.link ?? "", item.linkType ?? "")}>
                     {item.linkCustomTitle}
