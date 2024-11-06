@@ -34,6 +34,9 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
       )
     }
   },
+  "prefooter":{
+    prefooterGallery
+  },
   "footer": {
     footerLogo{
       alt,
