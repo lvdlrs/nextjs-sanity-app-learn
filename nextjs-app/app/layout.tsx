@@ -18,6 +18,7 @@ import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import HeaderHeightWrapper from "./components/HeaderHeightWrapper ";
 import { Providers } from "./provider";
 import HeaderMenu from "./components/global/HeaderMenu";
+import PrefooterLogo from "./components/shared/prefooter-logo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await sanityFetch({
@@ -83,6 +84,7 @@ export default async function RootLayout({
           <HeaderHeightWrapper>
             {children}
           </HeaderHeightWrapper>
+          {data?.data?.prefooter?.prefooterGallery && <PrefooterLogo logo={data?.data?.prefooter} /> }
           <Footer footer={data?.data?.footer ?? null }/>
           </Providers>
         </section>

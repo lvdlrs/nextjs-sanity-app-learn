@@ -1,6 +1,3 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { settingsQuery } from "@/sanity/lib/queries";
-
 import { stegaClean, type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/components/PortableText";
 import Link from "next/link";

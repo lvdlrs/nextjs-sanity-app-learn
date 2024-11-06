@@ -35,7 +35,13 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
     }
   },
   "prefooter":{
-    prefooterGallery
+    prefooterGallery{
+      galleryItem[]{
+        _key,
+        alt,
+        asset
+      }
+    }
   },
   "footer": {
     footerLogo{
