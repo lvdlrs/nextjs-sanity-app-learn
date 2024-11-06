@@ -8,7 +8,7 @@ import { VisualEditing, toPlainText } from "next-sanity";
 import { Toaster } from "sonner";
 
 import DraftModeToast from "@/app/components/DraftModeToast";
-import Footer from "@/app/components/Footer";
+import Footer from "@/app/components/global/Footer";
 
 import { LiveErrorBoundary } from "@/app/components/LiveErrorBoundary";
 import * as demo from "@/sanity/lib/demo";
