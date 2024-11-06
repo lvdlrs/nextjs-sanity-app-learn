@@ -17,7 +17,7 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import HeaderHeightWrapper from "./components/HeaderHeightWrapper ";
 import { Providers } from "./provider";
-import HeaderMenu from "./components/shared/HeaderMenu";
+import HeaderMenu from "./components/global/HeaderMenu";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await sanityFetch({
