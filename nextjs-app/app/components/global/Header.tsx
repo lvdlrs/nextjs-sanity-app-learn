@@ -6,7 +6,7 @@ import { stegaClean } from "@sanity/client/stega";
 import { Image } from "next-sanity/image";
 
 import { generateLink, urlForImage } from "@/sanity/lib/utils";
-import LinkButton from "./ui/LinkButton";
+import LinkButton from "../ui/LinkButton";
 
 
 export default async function Header() {
