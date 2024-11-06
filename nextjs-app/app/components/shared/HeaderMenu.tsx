@@ -14,6 +14,7 @@ import LinkButton from "../ui/LinkButton";
 type SiteNavigationProps = {
     data: NonNullable<SettingsQueryResult>["header"] | null;
     seo: NonNullable<SettingsQueryResult>["seo"] | null;
+    footer: NonNullable<SettingsQueryResult>["footer"] | null;
   };
 
 export default function HeaderMenu(props: SiteNavigationProps) {
@@ -40,15 +41,62 @@ export default function HeaderMenu(props: SiteNavigationProps) {
   );
 
   return (
-    <Navbar maxWidth="xl" className="container bg-transparent backdrop-blur-none" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar 
+    height="120px"
+    classNames={{
+      base: [
+        'bg-transparent',
+        'backdrop-blur-none',
+      ],
+      wrapper: [
+        '!container',
+        '!lg:h-auto'
+      ],
+      item: [
+        'data-[active=true]:text-blue-400'
+      ],
+      brand: [
+      ],
+      toggle:[
+        'w-[30px]',
+        'rounded-none'
+      ],
+      toggleIcon: [
+        'bg-blue-400',
+        'transition-all',
+        'duration-150',
+        'group-data-[pressed=true]:opacity-100',
+        'group-data-[open=true]:opacity-100',
+        'group-data-[open=true]:bg-transparent',
+        'w-[30px]',
+        'h-[2px]',
+        'before:w-[30px]',
+        'before:h-[2px]',
+        'before:bg-blue-400',
+        'before:-translate-y-[10px]',
+        'after:w-[30px]',
+        'after:h-[2px]',
+        'after:bg-blue-400',
+        'after:translate-y-[10px]'
+      ],
+      menu:[
+        'text-center',
+        'gap-7'
+      ],
+      menuItem:[
+        'text-inherit',
+        'leading-normal'
+      ]
+    }} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
         <NavbarBrand>
           {logo}
         </NavbarBrand>
+        
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="lg:hidden"
+        />
       </NavbarContent>
 
       <NavbarContent className="hidden lg:flex lg:items-center lg:justify-end gap-6 md:gap-14" justify="center">
@@ -57,7 +105,7 @@ export default function HeaderMenu(props: SiteNavigationProps) {
                 {item.cta ? (
                     <LinkButton href={item.link ?? "#"} type={item.linkType ?? ""} label={item.linkCustomTitle} openinewtab={item.openInNewTab ?? false}/>
                 ) : (  
-                    <Link isExternal={item.openInNewTab ? item.openInNewTab : false } href={generateLink(item.link ?? "", item.linkType ?? "")}>
+                    <Link className="py-[50px] hover:text-blue-400 hover:opacity-100" isExternal={item.openInNewTab ? item.openInNewTab : false } href={generateLink(item.link ?? "", item.linkType ?? "")}>
                     {item.linkCustomTitle}
                     </Link>
                 )}
@@ -67,15 +115,19 @@ export default function HeaderMenu(props: SiteNavigationProps) {
       <NavbarMenu>
         {props.data?.headerMenu?.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="block hover:text-blue-400"
-              href="#"
-              size="lg"
-            >
-              {item.linkCustomTitle}
-            </Link>
+            {item.cta ? (
+                    <LinkButton className="mt-36 inline-block" href={item.link ?? "#"} type={item.linkType ?? ""} label={item.linkCustomTitle} openinewtab={item.openInNewTab ?? false}/>
+                ) : (  
+                    <Link className="hover:text-blue-400 hover:opacity-100 text-[24px]" isExternal={item.openInNewTab ? item.openInNewTab : false } href={generateLink(item.link ?? "", item.linkType ?? "")}>
+                    {item.linkCustomTitle}
+                    </Link>
+                )}
           </NavbarMenuItem>
         ))}
+          <div className="mt-6 w-full justify-end flex flex-col gap-3 text-center py-6 border-t border-t-blue-400">
+            {props.footer?.copyrightSite ? <p className="text-[14px] text-grey-700">{props.footer?.copyrightSite}</p> : null }
+            <p className="text-[14px] text-grey-700">Webdesign by Fjellvann, a part of Solid Media</p>
+          </div>
       </NavbarMenu>
     </Navbar>
   );
