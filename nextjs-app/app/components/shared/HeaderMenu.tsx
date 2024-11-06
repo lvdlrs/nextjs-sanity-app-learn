@@ -55,7 +55,7 @@ export default function HeaderMenu(props: SiteNavigationProps) {
         {props.data?.headerMenu?.map((item)=>(
             <NavbarItem key={item._key}>
                 {item.cta ? (
-                    <LinkButton href={item.link ?? ""} type={item.linkType ?? ""} label={item.linkCustomTitle} openinewtab={item.openInNewTab ?? false}/>
+                    <LinkButton href={item.link ?? "#"} type={item.linkType ?? ""} label={item.linkCustomTitle} openinewtab={item.openInNewTab ?? false}/>
                 ) : (  
                     <Link isExternal={item.openInNewTab ? item.openInNewTab : false } href={generateLink(item.link ?? "", item.linkType ?? "")}>
                     {item.linkCustomTitle}
