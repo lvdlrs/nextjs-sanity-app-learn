@@ -19,6 +19,15 @@ export default {
       }
     },
     extend: {
+      keyframes: {
+				marquee: {
+					'0%': { transform: 'translate3d(0, 0, 0)' },
+					'100%': { transform: 'translate3d(-1920px, 0, 0)' },
+				},
+			},
+      animation: {
+				marquee: 'marquee 60s linear infinite',
+			},
       colors: {
         grey: {
           100: '#EDEDED',
@@ -69,16 +78,16 @@ export default {
         '.container': {
           maxWidth: '100%',
           '@screen sm': {
-            maxWidth: '1400px',
+            maxWidth: '1440px',
           },
           '@screen md': {
-            maxWidth: '1400px',
+            maxWidth: '1440px',
           },
           '@screen lg': {
-            maxWidth: '1400px',
+            maxWidth: '1440px',
           },
           '@screen xl': {
-            maxWidth: '1400px',
+            maxWidth: '1440px',
           },
         },
       });
