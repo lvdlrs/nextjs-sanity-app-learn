@@ -6,11 +6,15 @@ import PortableText from "@/app/components/PortableText";
 import Link from "next/link";
 import { Image } from "next-sanity/image";
 import { generateLink, urlForImage } from "@/sanity/lib/utils";
+import { SettingsQueryResult } from "@/sanity.types";
 
-export default async function Footer() {
-  const { data: settings } = await sanityFetch({query: settingsQuery});
+type FooterProps = {
+  footer: NonNullable<SettingsQueryResult>["footer"] | null;
+};
 
-  const footerData = settings?.footer
+export default async function Footer(props: FooterProps) {
+
+  const footerData = props?.footer;
 
   return (
     <footer className="relative">

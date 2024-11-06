@@ -83,7 +83,7 @@ export default async function RootLayout({
           <HeaderHeightWrapper>
             {children}
           </HeaderHeightWrapper>
-          <Footer />
+          <Footer footer={data?.data?.footer ?? null }/>
           </Providers>
         </section>
         <SpeedInsights />
