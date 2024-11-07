@@ -11,7 +11,8 @@ export default defineType({
   groups: [
     {name: 'global', title: 'Global'},
     {name: 'header', title: 'Header'},
-    {name: 'footer', title: 'Footer'}
+    {name: 'footer', title: 'Footer'},
+    {name: 'homepage', title: 'Homepage'}
   ],
   fields: [
     defineField({
@@ -204,7 +205,29 @@ export default defineType({
       title: 'Copyright',
       group: 'footer',
       initialValue: initial.copyrightText
-    })
+    }),
+    defineField({
+      name: 'pageBuilder',
+      title: 'Page builder',
+      type: 'array',
+      group: 'homepage',
+      of: [
+        {type: 'callToAction'}, 
+        {type: 'infoSection'},
+        {type: 'heroSection'}
+      ],
+      options: {
+        insertMenu: {
+          views: [
+            {
+              name: 'grid',
+              previewImageUrl: (schemaTypeName) =>
+                `/static/page-builder-thumbnails/${schemaTypeName}.webp`,
+            },
+          ],
+        },
+      },
+    }),
   ],
   preview: {
     prepare() {

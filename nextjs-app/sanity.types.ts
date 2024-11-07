@@ -320,6 +320,13 @@ export type Settings = {
     _key: string;
   } & FooterLink>;
   copyrightSite?: string;
+  pageBuilder?: Array<{
+    _key: string;
+  } & CallToAction | {
+    _key: string;
+  } & InfoSection | {
+    _key: string;
+  } & HeroSection>;
 };
 
 export type Page = {
