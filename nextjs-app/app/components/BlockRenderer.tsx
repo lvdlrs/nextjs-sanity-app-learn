@@ -1,7 +1,8 @@
 import React from "react";
 
-import Cta from "@/app/components/Cta";
-import Info from "@/app/components/InfoSection";
+import Cta from "@/app/components/blocks/Cta";
+import Info from "@/app/components/blocks/InfoSection";
+import Hero from "@/app/components/blocks/HeroSection"
 
 type BlocksType = {
   [key: string]: React.FC<any>;
@@ -20,6 +21,7 @@ type BlockProps = {
 const Blocks: BlocksType = {
   callToAction: Cta,
   infoSection: Info,
+  heroSection: Hero,
 };
 
 export default function BlockRenderer({ block, index }: BlockProps) {
