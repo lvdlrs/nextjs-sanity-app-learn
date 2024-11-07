@@ -39,7 +39,11 @@ export default defineType({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
-      of: [{type: 'callToAction'}, {type: 'infoSection'}],
+      of: [
+        {type: 'callToAction'}, 
+        {type: 'infoSection'},
+        {type: 'heroSection'}
+      ],
       options: {
         insertMenu: {
           views: [

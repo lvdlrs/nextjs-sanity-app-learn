@@ -2,8 +2,8 @@
 import person from './documents/person'
 import page from './documents/page'
 import post from './documents/post'
-import callToAction from './objects/callToAction'
-import infoSection from './objects/infoSection'
+import callToAction from './objects/pagebuilder/callToAction'
+import infoSection from './objects/pagebuilder/infoSection'
 import settings from './singletons/settings'
 import link from './objects/link'
 import blockContent from './objects/blockContent'
@@ -12,6 +12,7 @@ import footerLink from './objects/footerLink'
 import footerContent from './objects/footerContent'
 import social from './objects/social'
 import gallery from './objects/gallery'
+import heroSection from './objects/pagebuilder/heroSection'
 
 export const schemaTypes = [
   // Singletons
@@ -22,12 +23,14 @@ export const schemaTypes = [
   person,
   // Objects
   blockContent,
-  infoSection,
-  callToAction,
   link,
   social,
   gallery,
   headerLink,
   footerLink,
-  footerContent
+  footerContent,
+  // Page Builder
+  heroSection,
+  infoSection,
+  callToAction,
 ]

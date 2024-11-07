@@ -9,10 +9,10 @@ export default defineType({
   fields: [
     defineField({
       name: 'linkCustomTitle',
-      title: 'Menu Items Title',
+      title: 'Link Title',
       type: 'string',
       validation: (Rule) =>
-        Rule.required().error("You must specify a menu title.")
+        Rule.required().error("You must specify a link title.")
     }),
     defineField({
       name: 'linkType',
