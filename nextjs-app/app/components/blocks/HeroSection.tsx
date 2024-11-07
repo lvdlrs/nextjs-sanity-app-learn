@@ -28,7 +28,7 @@ export default function Hero({ block }: HeroProps) {
                         <div className="w-full md:w-[calc(30%-50px)]">
                             <div className="flex flex-col gap-6">
                             {block?.content && (
-                                <div className={}></div>
+                                <div className=""></div>
                             )}
                             </div>
                         </div>
