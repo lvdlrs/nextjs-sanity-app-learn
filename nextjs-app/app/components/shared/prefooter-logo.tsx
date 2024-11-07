@@ -11,25 +11,50 @@ export default function PrefooterLogo(props: PrefooterProps){
     return (
         <div className="prefooter__outercontainer overflow-hidden">
             <div className="container py-20">
-                <div className="prefooter__client_logo flex justify-center h-auto mx-auto gap-6 md:gap-[60px] lg:gap-[130px]">        
-                    {props.logo?.prefooterGallery?.galleryItem?.map((logoitem)=>(
-                    <div key={logoitem._key} className="flex-shrink-0  animate-marquee w-full max-w-[115px] relative h-5 md:h-8">
-                        <Image
-                            className="block"
-                            fill={true}
-                            alt={stegaClean(logoitem.alt) || ""}
-                            src={
-                                urlForImage(logoitem)
-                                ?.height(40)
-                                .width(115)
-                                .auto("format")
-                                .url() as string
-                                || ""
-                            }
-                            sizes="100vw"
-                            />
-                        </div>
-                    ))}
+                <div className="prefooter__client_logo flex justify-center h-auto mx-auto gap-6 md:gap-[60px] lg:gap-[130px]">
+                    {(props.logo?.prefooterGallery?.galleryItem?.length ?? 0) > 1 ?
+                    [...Array(4)].map((i)=>(
+                        props.logo?.prefooterGallery?.galleryItem?.map((logoitem)=>(
+                            <div key={logoitem._key} className="flex-shrink-0 animate-marquee w-full max-w-[115px] relative h-5 md:h-8">
+                                <Image
+                                    className="block"
+                                    fill={true}
+                                    alt={stegaClean(logoitem.alt) || ""}
+                                    src={
+                                        urlForImage(logoitem)
+                                        ?.height(40)
+                                        .width(115)
+                                        .auto("format")
+                                        .url() as string
+                                        || ""
+                                    }
+                                    sizes="100vw"
+                                    />
+                                </div>
+                            ))
+                    ))
+                    : 
+                    [...Array(12)].map((i)=>(
+                        props.logo?.prefooterGallery?.galleryItem?.map((logoitem)=>(
+                            <div key={logoitem._key} className="flex-shrink-0 animate-marquee w-full max-w-[115px] relative h-5 md:h-8">
+                                <Image
+                                    className="block"
+                                    fill={true}
+                                    alt={stegaClean(logoitem.alt) || ""}
+                                    src={
+                                        urlForImage(logoitem)
+                                        ?.height(40)
+                                        .width(115)
+                                        .auto("format")
+                                        .url() as string
+                                        || ""
+                                    }
+                                    sizes="100vw"
+                                    />
+                                </div>
+                            ))
+                    ))
+                    }
                 </div>
             </div>
         </div>
