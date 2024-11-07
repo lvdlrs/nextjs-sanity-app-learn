@@ -15,7 +15,7 @@ import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
-import HeaderHeightWrapper from "./components/HeaderHeightWrapper ";
+import HeaderHeightWrapper from "./components/global/HeaderHeightWrapper ";
 import { Providers } from "./provider";
 import HeaderMenu from "./components/global/HeaderMenu";
 import PrefooterLogo from "./components/shared/prefooter-logo";
