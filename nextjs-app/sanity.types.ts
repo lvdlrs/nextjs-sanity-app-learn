@@ -83,6 +83,7 @@ export type InfoSection = {
         [internalGroqTypeReferenceTo]?: "post";
       };
       openInNewTab?: boolean;
+      linkStyle?: "linkonly" | "primary" | "primary-outline" | "secondary" | "secondary-outline";
       _type: "link";
       _key: string;
     }>;
@@ -215,6 +216,7 @@ export type BlockContent = Array<{
       [internalGroqTypeReferenceTo]?: "post";
     };
     openInNewTab?: boolean;
+    linkStyle?: "linkonly" | "primary" | "primary-outline" | "secondary" | "secondary-outline";
     _type: "link";
     _key: string;
   }>;
@@ -1001,6 +1003,7 @@ export type PostQueryResult = {
       page: string | null;
       post: string | null;
       openInNewTab?: boolean;
+      linkStyle?: "linkonly" | "primary-outline" | "primary" | "secondary-outline" | "secondary";
       _type: "link";
       _key: string;
     }> | null;
