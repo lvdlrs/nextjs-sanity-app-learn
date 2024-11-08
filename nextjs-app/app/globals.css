@@ -3,15 +3,20 @@
 @tailwind utilities;
 
 
-.footer__contents a{
-    @apply no-underline font-normal;
-}
+@layer base {
+    html{
+        @apply font-sora;
+    }
+    .footer__contents a{
+        @apply no-underline font-normal;
+    }
 
-.footer__contents.prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)){
-    @apply my-3;
-}
+    .footer__contents.prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)){
+        @apply my-3;
+    }
 
 
-blockquote{
-    @apply py-[10px] px-6 border-l-2 border-l-blue-400 text-black md:text-[18px];
+    blockquote{
+        @apply py-[10px] px-6 border-l-2 border-l-blue-400 text-black md:text-[18px];
+    }
 }

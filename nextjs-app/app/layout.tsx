@@ -19,6 +19,7 @@ import HeaderHeightWrapper from "./components/global/HeaderHeightWrapper ";
 import { Providers } from "./provider";
 import HeaderMenu from "./components/global/HeaderMenu";
 import PrefooterLogo from "./components/shared/prefooter-logo";
+import { getGlobalData } from "@/sanity/data/general";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await sanityFetch({
@@ -63,7 +64,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
-  const data = await sanityFetch({query: settingsQuery});
+  const data = await getGlobalData();
   return (
     <html lang="en" className={`${sora.variable} bg-white text-grey-900`}>
       <body>

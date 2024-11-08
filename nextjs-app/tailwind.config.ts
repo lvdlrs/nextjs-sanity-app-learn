@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
-import {colors, nextui} from "@nextui-org/react";
+import {nextui} from "@nextui-org/react";
 
 export default {
   content: [
@@ -42,15 +42,19 @@ export default {
         }
       },
       fontSize: {
-        heading1: 'clamp(2rem, 1.5357rem + 2.3214vw, 3.625rem)',
-        heading2: 'clamp(1.5rem, 1.1786rem + 1.6071vw, 2.625rem)',
-        heading3: 'clamp(1.125rem, 0.9464rem + 0.8929vw, 1.75rem)',
-        heading4: 'clamp(1rem, 0.8571rem + 0.7143vw, 1.5rem)',
-        heading5: 'clamp(0.875rem, 0.8036rem + 0.3571vw, 1.125rem)',
-        heading6: 'clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem)',
+        base: ['16px', '1.6'],
+        heading1: ['clamp(2rem, 1.5357rem + 2.3214vw, 3.625rem)', '1.2'],
+        heading2: ['clamp(1.5rem, 1.1786rem + 1.6071vw, 2.625rem)', '1.2'],
+        heading3: ['clamp(1.125rem, 0.9464rem + 0.8929vw, 1.75rem)', '1.2'],
+        heading4: ['clamp(1rem, 0.8571rem + 0.7143vw, 1.5rem)', '1.2'],
+        heading5: ['clamp(0.875rem, 0.8036rem + 0.3571vw, 1.125rem)', '1.2'],
+        heading6: ['clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem)', '1.2'],
       },
+      boxShadow: {
+				'shadow1': '0px 0px 20px 0px rgba(0, 0, 0, 0.10)'
+			},
       fontFamily: {
-        sans: ["var(--font-sora)"],
+        sora: ["var(--font-sora)"],
       },
     },
   },

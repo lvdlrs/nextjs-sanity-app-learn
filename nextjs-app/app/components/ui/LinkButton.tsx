@@ -7,7 +7,7 @@ export default function LinkButton({
 }: {
   href: string;
   label: string;
-  variant?: "primary" | "secondary" | "primary-outline";
+  variant?: "primary" | "secondary" | "primary-outline" | "secondary-outline";
   type?: string;
   openinewtab?: boolean; 
   className?: string;

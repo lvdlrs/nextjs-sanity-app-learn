@@ -633,7 +633,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{  "seo": {    siteFavicon,    siteTitle,    description,    ogImage{      asset,      hotspot,      crop,      metadataBase    }  },  "header": {    siteLogo{      alt,      asset    },    siteLogoTransparent{      alt,      asset    },    headerMenu[]{      _key,      linkCustomTitle,      linkType,      openInNewTab,      cta,      "link": select(        linkType == "page" => page->slug.current,        linkType == "post" => post->slug.current,        linkType == "href" => href      )    }  },  "prefooter":{    prefooterGallery{      galleryItem[]{        _key,        alt,        asset      }    }  },  "footer": {    footerLogo{      alt,      asset    },    footerMenu[]{      _key,      menuheading,      footerMenuItems[]{        _key,           linkCustomTitle,        linkType,        openInNewTab,        "link": select(          linkType == "page" => page->slug.current,          linkType == "post" => post->slug.current,          linkType == "href" => href        )      }    },    footerContent{      content    },    socialIcon[]{      _key,      href,      socialIcon{        alt,        asset      },    },    copyrightSite  }}
+// Query: *[_type == "settings"][0]{  "seo": {    siteFavicon,    siteTitle,    description,    ogImage{      asset,      hotspot,      crop,      metadataBase    }  },  "header": {    siteLogo{      alt,      asset    },    siteLogoTransparent{      alt,      asset    },    headerMenu[]{      ...,      "link": select(        linkType == "page" => page->slug.current,        linkType == "post" => post->slug.current,        linkType == "href" => href      )    }  },  "prefooter":{    prefooterGallery{      galleryItem[]{        _key,        alt,        asset      }    }  },  "footer": {    footerLogo{      alt,      asset    },    footerMenu[]{      _key,      menuheading,      footerMenuItems[]{        ...,        "link": select(          linkType == "page" => page->slug.current,          linkType == "post" => post->slug.current,          linkType == "href" => href        )      }    },    footerContent{      content    },    socialIcon[]{      _key,      href,      socialIcon{        alt,        asset      },    },    copyrightSite  },  "frontpage":{    pageBuilder[]{      _type == "callToAction" => {    ...,    "link": select(  linkType == "page" => page->slug.current,  linkType == "post" => post->slug.current,  linkType == "href" => href),},_type == "heroSection" =>{    ...,    mediaurl{  "fileurl":asset->url},    btnLink[]{        ...,        "link": select(  linkType == "page" => page->slug.current,  linkType == "post" => post->slug.current,  linkType == "href" => href)    }}    }  }}
 export type SettingsQueryResult = {
   seo: {
     siteFavicon: {
@@ -700,10 +700,24 @@ export type SettingsQueryResult = {
     } | null;
     headerMenu: Array<{
       _key: string;
+      _type: "headerLink";
       linkCustomTitle: string;
-      linkType: "href" | "page" | "post" | null;
-      openInNewTab: boolean | null;
-      cta: boolean | null;
+      linkType?: "href" | "page" | "post";
+      href?: string;
+      page?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      };
+      post?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      };
+      cta?: boolean;
+      openInNewTab?: boolean;
       link: string | null;
     }> | null;
   };
@@ -736,9 +750,23 @@ export type SettingsQueryResult = {
       menuheading: string | null;
       footerMenuItems: Array<{
         _key: string;
+        _type: "link";
         linkCustomTitle: string;
-        linkType: "href" | "page" | "post" | null;
-        openInNewTab: boolean | null;
+        linkType?: "href" | "page" | "post";
+        href?: string;
+        page?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        };
+        post?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        };
+        openInNewTab?: boolean;
         link: string | null;
       }> | null;
     }> | null;
@@ -759,6 +787,58 @@ export type SettingsQueryResult = {
       } | null;
     }> | null;
     copyrightSite: string | null;
+  };
+  frontpage: {
+    pageBuilder: Array<{
+      _key: string;
+      _type: "callToAction";
+      heading?: string;
+      text?: string;
+      buttonText?: string;
+      link: null;
+    } | {
+      _key: string;
+      _type: "heroSection";
+      heading?: string;
+      content?: string;
+      btnLink: Array<{
+        _key: string;
+        _type: "link";
+        linkCustomTitle: string;
+        linkType?: "href" | "page" | "post";
+        href?: string;
+        page?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        };
+        post?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        };
+        openInNewTab?: boolean;
+        link: string | null;
+      }> | null;
+      thumbImage?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      mediaurl: {
+        fileurl: string | null;
+      } | null;
+      overlayColor?: "darkoverlay" | "lightoverlay" | "nooverlay";
+      textColor?: "darktext" | "lighttext";
+    } | {}> | null;
   };
 } | null;
 // Variable: pageQuery
@@ -782,7 +862,7 @@ export type PageQueryResult = Array<{
   } & InfoSection>;
 }>;
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current        }      },      }    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      _type == "callToAction" => {    ...,    "link": select(  linkType == "page" => page->slug.current,  linkType == "post" => post->slug.current,  linkType == "href" => href),},_type == "heroSection" =>{    ...,    mediaurl{  "fileurl":asset->url},    btnLink[]{        ...,        "link": select(  linkType == "page" => page->slug.current,  linkType == "post" => post->slug.current,  linkType == "href" => href)    }}    },  }
 export type GetPageQueryResult = {
   _id: string;
   name: string;
@@ -795,23 +875,33 @@ export type GetPageQueryResult = {
     heading?: string;
     text?: string;
     buttonText?: string;
-    link: {
-      _type: "link";
-      linkCustomTitle: string;
-      linkType?: "href" | "page" | "post";
-      href?: string;
-      page: string | null;
-      post: string | null;
-      openInNewTab?: boolean;
-    } | null;
+    link: null;
   } | {
     _key: string;
     _type: "heroSection";
     heading?: string;
     content?: string;
-    btnLink?: Array<{
+    btnLink: Array<{
       _key: string;
-    } & Link>;
+      _type: "link";
+      linkCustomTitle: string;
+      linkType?: "href" | "page" | "post";
+      href?: string;
+      page?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      };
+      post?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      };
+      openInNewTab?: boolean;
+      link: string | null;
+    }> | null;
     thumbImage?: {
       asset?: {
         _ref: string;
@@ -823,55 +913,12 @@ export type GetPageQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
-    mediaurl?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-      };
-      _type: "file";
-    };
+    mediaurl: {
+      fileurl: string | null;
+    } | null;
     overlayColor?: "darkoverlay" | "lightoverlay" | "nooverlay";
     textColor?: "darktext" | "lighttext";
-  } | {
-    _key: string;
-    _type: "infoSection";
-    heading?: string;
-    subheading?: string;
-    content?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        linkType?: "href" | "page" | "post";
-        href?: string;
-        page?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "page";
-        };
-        post?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "post";
-        };
-        openInNewTab?: boolean;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  }> | null;
+  } | {}> | null;
 } | null;
 // Variable: allPostsQuery
 // Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
@@ -950,7 +997,7 @@ export type MorePostsQueryResult = Array<{
   } | null;
 }>;
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current        }      }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,      "link": select(  linkType == "page" => page->slug.current,  linkType == "post" => post->slug.current,  linkType == "href" => href)    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type PostQueryResult = {
   content: Array<{
     children?: Array<{
@@ -979,7 +1026,7 @@ export type PostQueryResult = {
       openInNewTab?: boolean;
       _type: "link";
       _key: string;
-      link: null;
+      link: string | null;
     }> | null;
     level?: number;
     _type: "block";
@@ -1035,12 +1082,12 @@ export type PagesSlugsResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]{\n  \"seo\": {\n    siteFavicon,\n    siteTitle,\n    description,\n    ogImage{\n      asset,\n      hotspot,\n      crop,\n      metadataBase\n    }\n  },\n  \"header\": {\n    siteLogo{\n      alt,\n      asset\n    },\n    siteLogoTransparent{\n      alt,\n      asset\n    },\n    headerMenu[]{\n      _key,\n      linkCustomTitle,\n      linkType,\n      openInNewTab,\n      cta,\n      \"link\": select(\n        linkType == \"page\" => page->slug.current,\n        linkType == \"post\" => post->slug.current,\n        linkType == \"href\" => href\n      )\n    }\n  },\n  \"prefooter\":{\n    prefooterGallery{\n      galleryItem[]{\n        _key,\n        alt,\n        asset\n      }\n    }\n  },\n  \"footer\": {\n    footerLogo{\n      alt,\n      asset\n    },\n    footerMenu[]{\n      _key,\n      menuheading,\n      footerMenuItems[]{\n        _key,   \n        linkCustomTitle,\n        linkType,\n        openInNewTab,\n        \"link\": select(\n          linkType == \"page\" => page->slug.current,\n          linkType == \"post\" => post->slug.current,\n          linkType == \"href\" => href\n        )\n      }\n    },\n    footerContent{\n      content\n    },\n    socialIcon[]{\n      _key,\n      href,\n      socialIcon{\n        alt,\n        asset\n      },\n    },\n    copyrightSite\n  }\n}": SettingsQueryResult;
+    "*[_type == \"settings\"][0]{\n  \"seo\": {\n    siteFavicon,\n    siteTitle,\n    description,\n    ogImage{\n      asset,\n      hotspot,\n      crop,\n      metadataBase\n    }\n  },\n  \"header\": {\n    siteLogo{\n      alt,\n      asset\n    },\n    siteLogoTransparent{\n      alt,\n      asset\n    },\n    headerMenu[]{\n      ...,\n      \"link\": select(\n        linkType == \"page\" => page->slug.current,\n        linkType == \"post\" => post->slug.current,\n        linkType == \"href\" => href\n      )\n    }\n  },\n  \"prefooter\":{\n    prefooterGallery{\n      galleryItem[]{\n        _key,\n        alt,\n        asset\n      }\n    }\n  },\n  \"footer\": {\n    footerLogo{\n      alt,\n      asset\n    },\n    footerMenu[]{\n      _key,\n      menuheading,\n      footerMenuItems[]{\n        ...,\n        \"link\": select(\n          linkType == \"page\" => page->slug.current,\n          linkType == \"post\" => post->slug.current,\n          linkType == \"href\" => href\n        )\n      }\n    },\n    footerContent{\n      content\n    },\n    socialIcon[]{\n      _key,\n      href,\n      socialIcon{\n        alt,\n        asset\n      },\n    },\n    copyrightSite\n  },\n  \"frontpage\":{\n    pageBuilder[]{\n      \n_type == \"callToAction\" => {\n    ...,\n    \n\"link\": select(\n  linkType == \"page\" => page->slug.current,\n  linkType == \"post\" => post->slug.current,\n  linkType == \"href\" => href\n)\n,\n},\n_type == \"heroSection\" =>{\n    ...,\n    \nmediaurl{\n  \"fileurl\":asset->url\n}\n,\n    btnLink[]{\n        ...,\n        \n\"link\": select(\n  linkType == \"page\" => page->slug.current,\n  linkType == \"post\" => post->slug.current,\n  linkType == \"href\" => href\n)\n\n    }\n}\n\n    }\n  }\n}": SettingsQueryResult;
     "*[_type == 'page']": PageQueryResult;
-    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    name,\n    slug,\n    heading,\n    subheading,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        ...,\n        \n  link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current\n        }\n      }\n,\n      }\n    },\n  }\n": GetPageQueryResult;
+    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    name,\n    slug,\n    heading,\n    subheading,\n    \"pageBuilder\": pageBuilder[]{\n      \n_type == \"callToAction\" => {\n    ...,\n    \n\"link\": select(\n  linkType == \"page\" => page->slug.current,\n  linkType == \"post\" => post->slug.current,\n  linkType == \"href\" => href\n)\n,\n},\n_type == \"heroSection\" =>{\n    ...,\n    \nmediaurl{\n  \"fileurl\":asset->url\n}\n,\n    btnLink[]{\n        ...,\n        \n\"link\": select(\n  linkType == \"page\" => page->slug.current,\n  linkType == \"post\" => post->slug.current,\n  linkType == \"href\" => href\n)\n\n    }\n}\n\n    },\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"post\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": AllPostsQueryResult;
     "\n  *[_type == \"post\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": MorePostsQueryResult;
-    "\n  *[_type == \"post\" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current\n        }\n      }\n\n    }\n  },\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": PostQueryResult;
+    "\n  *[_type == \"post\" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n\"link\": select(\n  linkType == \"page\" => page->slug.current,\n  linkType == \"post\" => post->slug.current,\n  linkType == \"href\" => href\n)\n\n    }\n  },\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": PostQueryResult;
     "\n  *[_type == \"post\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PostPagesSlugsResult;
     "\n  *[_type == \"page\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": PagesSlugsResult;
   }

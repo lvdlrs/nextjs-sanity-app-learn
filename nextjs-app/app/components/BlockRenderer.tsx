@@ -32,6 +32,7 @@ export default function BlockRenderer({ block, index }: BlockProps) {
       block: block,
       index: index,
     });
+
   }
   // Block doesn't exist yet
   return React.createElement(

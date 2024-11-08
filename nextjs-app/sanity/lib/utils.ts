@@ -37,7 +37,7 @@ export function linkResolver(link: Link | undefined) {
       return link.href || null;
     case "page":
       if (link?.page) {
-        return `/${link.page}`;
+        return `/page/${link.page}`;
       }
       return null;
     case "post":
