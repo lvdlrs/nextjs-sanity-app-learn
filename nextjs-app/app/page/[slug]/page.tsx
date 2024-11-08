@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Head from "next/head";
 import { notFound } from "next/navigation";
 
-import PageBuilderPage from "@/app/components/PageBuilder";
+import PageBuilderPage from "@/app/components/blocks/PageBuilder";
 import { sanityFetch } from "@/sanity/lib/live";
 import { getPageQuery, pagesSlugs } from "@/sanity/lib/queries";
 import { Page as PageType } from "@/sanity.types";
