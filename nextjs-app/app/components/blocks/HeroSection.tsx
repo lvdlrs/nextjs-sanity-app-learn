@@ -1,5 +1,6 @@
 import { HeroSection } from "@/sanity.types";
 import ResolvedLink from "@/app/components/ResolvedLink";
+import LinkGroup from "../ui/LinkGroup";
 
 type HeroProps = {
   block: HeroSection;
@@ -11,6 +12,7 @@ export default function Hero({ block }: HeroProps) {
   const textColor = block?.textColor;
   const overlayColor = block?.overlayColor;
   const videoThumbnail = block?.thumbImage;
+  const video = block?.mediaurl;
 
   return (
     <div data-color={textColor} className="relative w-full h-[729px] md:h-[740px] lg:h-[769px] overflow-hidden data-[color=lighttext]:text-white">
@@ -31,9 +33,7 @@ export default function Hero({ block }: HeroProps) {
                             {block?.content && (
                                 <p className="">{ block.content }</p>
                             )}
-                            {block?.btnLink?.map((link)=>(
-                                <ResolvedLink key={link._key} link={link}>{link.linkCustomTitle}</ResolvedLink>
-                            ))}
+                            {(block?.btnLink?.length ?? 0) > 0 && LinkGroup(block?.btnLink)}
                             </div>
                         </div>
                     ) : "" }

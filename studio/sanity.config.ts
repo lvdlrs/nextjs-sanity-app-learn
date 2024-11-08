@@ -57,6 +57,10 @@ export default defineConfig({
             filter: `_type == "page" && slug.current == $slug || _id == $slug`,
           },
           {
+            route: '/page/:slug',
+            filter: `_type == "page" && slug.current == $slug || _id == $slug`,
+          },
+          {
             route: '/posts/:slug',
             filter: `_type == "post" && slug.current == $slug || _id == $slug`,
           },

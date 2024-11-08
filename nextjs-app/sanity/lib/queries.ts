@@ -66,9 +66,11 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
     },
     copyrightSite
   },
-  "frontpage": pageBuilder[]{
+  "frontpage":{
+    pageBuilder[]{
       ${PAGEBUILDER_BLOCK_TYPE}
     }
+  }
 }`);
 
 
