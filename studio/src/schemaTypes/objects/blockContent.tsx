@@ -44,7 +44,8 @@ export default defineType({
                 type: 'url',
                 hidden: ({parent}) => parent?.linkType !== 'href' && parent?.linkType != null,
                 validation: (Rule) => Rule.uri({
-                  scheme: ['http', 'https', 'mailto', 'tel', '#']
+                  scheme: ['http', 'https', 'mailto', 'tel', '#'],
+                  allowRelative: true
                 }),
               }),
               defineField({
