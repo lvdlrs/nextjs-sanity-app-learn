@@ -13,8 +13,11 @@ export default function Hero({ block }: HeroProps) {
   const videoThumbnail = block?.thumbImage;
 
   return (
-    <div data-color={textColor} data-overlay={overlayColor} className="relative w-full h-[729px] md:h-[740px] lg:h-[769px] overflow-hidden data-[color=lighttext]:text-white">
-        <div className="flex flex-col justify-end">
+    <div data-color={textColor} className="relative w-full h-[729px] md:h-[740px] lg:h-[769px] overflow-hidden data-[color=lighttext]:text-white">
+        <div className="absolute top-0 left-0 w-full h-full">
+        <div data-overlay={overlayColor} className="absolute top-0 left-0 w-full h-full z-[4] data-[overlay=darkoverlay]:bg-[#012C46] bg-opacity-45"></div>
+        </div>
+        <div className="flex flex-col justify-end relative z-[5] h-full py-10 md:py-14 lg:py-[100px]">
             <div className="container">
                 <div className="flex flex-col gap-10 md:flex-row lg:gap-[100px]">
                     {block?.heading && (
