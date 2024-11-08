@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Image } from "next-sanity/image";
 import { generateLink, urlForImage } from "@/sanity/lib/utils";
 import { SettingsQueryResult } from "@/sanity.types";
+import ResolvedLink from "../ResolvedLink";
 
 type FooterProps = {
   footer: NonNullable<SettingsQueryResult>["footer"] | null;
@@ -79,7 +80,7 @@ export default async function Footer(props: FooterProps) {
                         
                         {menu.footerMenuItems.map((navItem)=>(
                           <li key={navItem._key}>
-                           <Link href={generateLink(navItem.link ?? "", navItem.linkType ?? "")}>{navItem.linkCustomTitle}</Link>
+                            <ResolvedLink className="hover:text-blue-400" variant="linkonly" link={navItem}>{navItem.linkCustomTitle}</ResolvedLink>
                           </li>
                         ))
                         }

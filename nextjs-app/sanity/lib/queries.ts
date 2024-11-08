@@ -50,11 +50,7 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
       menuheading,
       footerMenuItems[]{
         ...,
-        "link": select(
-          linkType == "page" => page->slug.current,
-          linkType == "post" => post->slug.current,
-          linkType == "href" => href
-        )
+        ${LINKFIELDS}
       }
     },
     footerContent{
