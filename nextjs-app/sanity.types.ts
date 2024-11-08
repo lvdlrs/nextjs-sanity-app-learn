@@ -187,6 +187,7 @@ export type Link = {
     [internalGroqTypeReferenceTo]?: "post";
   };
   openInNewTab?: boolean;
+  linkStyle?: "linkonly" | "primary" | "primary-outline" | "secondary" | "secondary-outline";
 };
 
 export type BlockContent = Array<{
@@ -633,7 +634,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{  "seo": {    siteFavicon,    siteTitle,    description,    ogImage{      asset,      hotspot,      crop,      metadataBase    }  },  "header": {    siteLogo{      alt,      asset    },    siteLogoTransparent{      alt,      asset    },    headerMenu[]{      ...,      "link": select(        linkType == "page" => page->slug.current,        linkType == "post" => post->slug.current,        linkType == "href" => href      )    }  },  "prefooter":{    prefooterGallery{      galleryItem[]{        _key,        alt,        asset      }    }  },  "footer": {    footerLogo{      alt,      asset    },    footerMenu[]{      _key,      menuheading,      footerMenuItems[]{        ...,        "link": select(          linkType == "page" => page->slug.current,          linkType == "post" => post->slug.current,          linkType == "href" => href        )      }    },    footerContent{      content    },    socialIcon[]{      _key,      href,      socialIcon{        alt,        asset      },    },    copyrightSite  },  "frontpage": pageBuilder[]{      _type == "callToAction" => {    ...,    link{      ...,      _type == "link" =>{  "page": page->slug.current,  "post": post->slug.current,  "href": href}    }},_type == "heroSection" =>{    ...,    mediaurl{  "fileurl":asset->url},    btnLink[]{        ...,        _type == "link" =>{  "page": page->slug.current,  "post": post->slug.current,  "href": href}    }}    }}
+// Query: *[_type == "settings"][0]{  "seo": {    siteFavicon,    siteTitle,    description,    ogImage{      asset,      hotspot,      crop,      metadataBase    }  },  "header": {    siteLogo{      alt,      asset    },    siteLogoTransparent{      alt,      asset    },    headerMenu[]{      ...,      "link": select(        linkType == "page" => page->slug.current,        linkType == "post" => post->slug.current,        linkType == "href" => href      )    }  },  "prefooter":{    prefooterGallery{      galleryItem[]{        _key,        alt,        asset      }    }  },  "footer": {    footerLogo{      alt,      asset    },    footerMenu[]{      _key,      menuheading,      footerMenuItems[]{        ...,        _type == "link" =>{  "page": page->slug.current,  "post": post->slug.current,  "href": href}      }    },    footerContent{      content    },    socialIcon[]{      _key,      href,      socialIcon{        alt,        asset      },    },    copyrightSite  },  "frontpage": pageBuilder[]{      _type == "callToAction" => {    ...,    link{      ...,      _type == "link" =>{  "page": page->slug.current,  "post": post->slug.current,  "href": href}    }},_type == "heroSection" =>{    ...,    mediaurl{  "fileurl":asset->url},    btnLink[]{        ...,        _type == "link" =>{  "page": page->slug.current,  "post": post->slug.current,  "href": href}    }}    }}
 export type SettingsQueryResult = {
   seo: {
     siteFavicon: {
@@ -753,21 +754,11 @@ export type SettingsQueryResult = {
         _type: "link";
         linkCustomTitle: string;
         linkType?: "href" | "page" | "post";
-        href?: string;
-        page?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "page";
-        };
-        post?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "post";
-        };
+        href: string | null;
+        page: string | null;
+        post: string | null;
         openInNewTab?: boolean;
-        link: string | null;
+        linkStyle?: "linkonly" | "primary-outline" | "primary" | "secondary-outline" | "secondary";
       }> | null;
     }> | null;
     footerContent: {
@@ -802,6 +793,7 @@ export type SettingsQueryResult = {
       page: string | null;
       post: string | null;
       openInNewTab?: boolean;
+      linkStyle?: "linkonly" | "primary-outline" | "primary" | "secondary-outline" | "secondary";
     } | null;
   } | {
     _key: string;
@@ -817,6 +809,7 @@ export type SettingsQueryResult = {
       page: string | null;
       post: string | null;
       openInNewTab?: boolean;
+      linkStyle?: "linkonly" | "primary-outline" | "primary" | "secondary-outline" | "secondary";
     }> | null;
     thumbImage?: {
       asset?: {
@@ -878,6 +871,7 @@ export type GetPageQueryResult = {
       page: string | null;
       post: string | null;
       openInNewTab?: boolean;
+      linkStyle?: "linkonly" | "primary-outline" | "primary" | "secondary-outline" | "secondary";
     } | null;
   } | {
     _key: string;
@@ -893,6 +887,7 @@ export type GetPageQueryResult = {
       page: string | null;
       post: string | null;
       openInNewTab?: boolean;
+      linkStyle?: "linkonly" | "primary-outline" | "primary" | "secondary-outline" | "secondary";
     }> | null;
     thumbImage?: {
       asset?: {
@@ -1063,7 +1058,7 @@ export type PagesSlugsResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]{\n  \"seo\": {\n    siteFavicon,\n    siteTitle,\n    description,\n    ogImage{\n      asset,\n      hotspot,\n      crop,\n      metadataBase\n    }\n  },\n  \"header\": {\n    siteLogo{\n      alt,\n      asset\n    },\n    siteLogoTransparent{\n      alt,\n      asset\n    },\n    headerMenu[]{\n      ...,\n      \"link\": select(\n        linkType == \"page\" => page->slug.current,\n        linkType == \"post\" => post->slug.current,\n        linkType == \"href\" => href\n      )\n    }\n  },\n  \"prefooter\":{\n    prefooterGallery{\n      galleryItem[]{\n        _key,\n        alt,\n        asset\n      }\n    }\n  },\n  \"footer\": {\n    footerLogo{\n      alt,\n      asset\n    },\n    footerMenu[]{\n      _key,\n      menuheading,\n      footerMenuItems[]{\n        ...,\n        \"link\": select(\n          linkType == \"page\" => page->slug.current,\n          linkType == \"post\" => post->slug.current,\n          linkType == \"href\" => href\n        )\n      }\n    },\n    footerContent{\n      content\n    },\n    socialIcon[]{\n      _key,\n      href,\n      socialIcon{\n        alt,\n        asset\n      },\n    },\n    copyrightSite\n  },\n  \"frontpage\": pageBuilder[]{\n      \n_type == \"callToAction\" => {\n    ...,\n    link{\n      ...,\n      \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n    }\n},\n_type == \"heroSection\" =>{\n    ...,\n    \nmediaurl{\n  \"fileurl\":asset->url\n}\n,\n    btnLink[]{\n        ...,\n        \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n    }\n}\n\n    }\n}": SettingsQueryResult;
+    "*[_type == \"settings\"][0]{\n  \"seo\": {\n    siteFavicon,\n    siteTitle,\n    description,\n    ogImage{\n      asset,\n      hotspot,\n      crop,\n      metadataBase\n    }\n  },\n  \"header\": {\n    siteLogo{\n      alt,\n      asset\n    },\n    siteLogoTransparent{\n      alt,\n      asset\n    },\n    headerMenu[]{\n      ...,\n      \"link\": select(\n        linkType == \"page\" => page->slug.current,\n        linkType == \"post\" => post->slug.current,\n        linkType == \"href\" => href\n      )\n    }\n  },\n  \"prefooter\":{\n    prefooterGallery{\n      galleryItem[]{\n        _key,\n        alt,\n        asset\n      }\n    }\n  },\n  \"footer\": {\n    footerLogo{\n      alt,\n      asset\n    },\n    footerMenu[]{\n      _key,\n      menuheading,\n      footerMenuItems[]{\n        ...,\n        \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n      }\n    },\n    footerContent{\n      content\n    },\n    socialIcon[]{\n      _key,\n      href,\n      socialIcon{\n        alt,\n        asset\n      },\n    },\n    copyrightSite\n  },\n  \"frontpage\": pageBuilder[]{\n      \n_type == \"callToAction\" => {\n    ...,\n    link{\n      ...,\n      \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n    }\n},\n_type == \"heroSection\" =>{\n    ...,\n    \nmediaurl{\n  \"fileurl\":asset->url\n}\n,\n    btnLink[]{\n        ...,\n        \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n    }\n}\n\n    }\n}": SettingsQueryResult;
     "*[_type == 'page']": PageQueryResult;
     "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    name,\n    slug,\n    heading,\n    subheading,\n    \"pageBuilder\": pageBuilder[]{\n      \n_type == \"callToAction\" => {\n    ...,\n    link{\n      ...,\n      \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n    }\n},\n_type == \"heroSection\" =>{\n    ...,\n    \nmediaurl{\n  \"fileurl\":asset->url\n}\n,\n    btnLink[]{\n        ...,\n        \n_type == \"link\" =>{\n  \"page\": page->slug.current,\n  \"post\": post->slug.current,\n  \"href\": href\n}\n\n    }\n}\n\n    },\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"post\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": AllPostsQueryResult;
