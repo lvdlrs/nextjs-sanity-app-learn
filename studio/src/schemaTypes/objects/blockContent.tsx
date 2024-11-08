@@ -82,6 +82,22 @@ export default defineType({
                 type: 'boolean',
                 initialValue: false,
               }),
+              defineField({
+                name: 'linkStyle',
+                title: 'Link Style',
+                type: 'string',
+                initialValue: 'linkonly',
+                options: {
+                  list: [
+                    {title: 'Link only', value: 'linkonly'},
+                    {title: 'Primary Button', value: 'primary'},
+                    {title: 'Primary Outline Button', value: 'primary-outline'},
+                    {title: 'Secondary Button', value: 'secondary'},
+                    {title: 'Secondary Outline Button', value: 'secondary-outline'},
+                  ],
+                  layout: 'radio',
+                },
+              })
             ],
           },
         ],

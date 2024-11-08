@@ -475,6 +475,35 @@
                           },
                           "optional": true
                         },
+                        "linkStyle": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "union",
+                            "of": [
+                              {
+                                "type": "string",
+                                "value": "linkonly"
+                              },
+                              {
+                                "type": "string",
+                                "value": "primary"
+                              },
+                              {
+                                "type": "string",
+                                "value": "primary-outline"
+                              },
+                              {
+                                "type": "string",
+                                "value": "secondary"
+                              },
+                              {
+                                "type": "string",
+                                "value": "secondary-outline"
+                              }
+                            ]
+                          },
+                          "optional": true
+                        },
                         "_type": {
                           "type": "objectAttribute",
                           "value": {
@@ -1350,6 +1379,35 @@
                     "type": "objectAttribute",
                     "value": {
                       "type": "boolean"
+                    },
+                    "optional": true
+                  },
+                  "linkStyle": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "union",
+                      "of": [
+                        {
+                          "type": "string",
+                          "value": "linkonly"
+                        },
+                        {
+                          "type": "string",
+                          "value": "primary"
+                        },
+                        {
+                          "type": "string",
+                          "value": "primary-outline"
+                        },
+                        {
+                          "type": "string",
+                          "value": "secondary"
+                        },
+                        {
+                          "type": "string",
+                          "value": "secondary-outline"
+                        }
+                      ]
                     },
                     "optional": true
                   },
