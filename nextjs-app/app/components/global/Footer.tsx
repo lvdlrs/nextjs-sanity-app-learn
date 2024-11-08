@@ -80,7 +80,7 @@ export default async function Footer(props: FooterProps) {
                         
                         {menu.footerMenuItems.map((navItem)=>(
                           <li key={navItem._key}>
-                            <ResolvedLink className="hover:text-blue-400" variant="linkonly" link={navItem}>{navItem.linkCustomTitle}</ResolvedLink>
+                            <ResolvedLink className="hover:text-blue-400" link={navItem}>{navItem.linkCustomTitle}</ResolvedLink>
                           </li>
                         ))
                         }
