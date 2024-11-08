@@ -32,7 +32,7 @@ export default function Hero({ block }: HeroProps) {
                                 <p className="">{ block.content }</p>
                             )}
                             {block?.btnLink?.map((link)=>(
-                                <ResolvedLink variant="linkonly" key={link._key} link={link}>{link.linkCustomTitle}</ResolvedLink>
+                                <ResolvedLink key={link._key} link={link}>{link.linkCustomTitle}</ResolvedLink>
                             ))}
                             </div>
                         </div>
